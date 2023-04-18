@@ -1,0 +1,366 @@
+\documentclass[UTF8,12pt]{ctexart}
+\usepackage[T1]{fontenc}
+\usepackage{amsfonts}
+\usepackage{geometry}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\geometry{a4paper,scale=0.8}
+    \title{从自然数指数幂到三角函数}                   %———总标题
+    \author{马逸飞 522031910765}
+\begin{document}
+    \maketitle                                  % —— 显示标题
+\tableofcontents                               %—— 制作目录(目录是根据标题自动生成的)
+
+\section{摘要}
+    本文从较为自然的自然数指数幂出发，定义整数指数幂、有理数指数幂、实数指数幂、复数指数幂运算和指数函数，并探究它们的性质。最后运用这些工具，尝试用分析学观点定义三角函数，并且论证三角函数的一些基本性质。\\
+    \paragraph{Keywords: } 指数\ 指数函数\ $e$\ 自然指数\ 无穷级数\ 三角函数
+
+\section{引言}
+    在中学数学学习中，我们接触了指数（幂）运算，逐步学习自然数指数幂、整数指数幂、有理数指数幂和实数指数幂。
+    然而，中学时并没有严格的极限以及反函数概念，导致课本上对实数指数幂的定义并不严谨；当高中学习指数函数时，我们很难理解它的各种性质。
+    更关键的是，高中课本并没有建立起 $e = \lim _ {n \to +\infty} (1 + \dfrac{1}{n})^n$ 与 $(e^x)' = e^x$ 之间的联系，让我们对指数函数的导数感到很疑惑。
+    因此，在学习了数学分析课程后，我们有必要重新检视实数指数幂的定义，并且对指数函数给出级数定义，并揭示两个定义间的联系。
+    
+    同时，三角函数的严格定义也是一个重要的话题。高中对于曲线的长度并没有严格定义，也没有介绍欧拉公式与级数，这就导致了三角函数严格定义的困难。
+    我们将用到这些工具，对三角函数给出新的理解方式。
+
+    在陈纪修《数学分析》教材中，三角函数的严格定义仍然是缺失的，对 $\pi$ 的定义有循环论证之嫌，且指数函数的内容尚不十分全面，本文将作为教材内容的补充。
+
+\section{有理数指数幂}
+    首先，我们考察有理数指数幂的定义和几个基本性质。
+    \subsection{自然数指数幂与单位分数指数幂（开方）}
+        对于 $x \in \mathbb{R}^+$，当 $n$ 取自然数时，$x^n$ 的定义是平凡的；令 $\dfrac 1 n$ 为单位分数 $(n \in \mathbb N^+)$，则 $g(x) = x^{\frac 1 n}$ 为 $f(x) = x^n$ 的反函数。
+
+        在这里，我们有必要运用反函数存在性定理对这一定义加以分析。当 $n \in \mathbb N^+$ 时
+        $$
+        \lim_{x \to 0^+} x^n = 0, \lim_{x \to +\infty} x^n = +\infty
+        $$
+        则 $f(x) = x^n$ 取遍 $\mathbb R^+$，即 $f(x)$ 的值域是 $\mathbb{R}^+$。
+        同时，易证 $f(x)$ 的严格单调性。因此，由反函数存在性定理，$f(x)$ 必存在定义在 $\mathbb R^+$ 上的反函数 $f^{-1}(y)$，它是在 $(0, +\infty)$ 上单调增加的。
+
+        当 $x, y \in \mathbb R^+,\ n \in \mathbb N$ 时，我们容易得到以下三个性质：
+        $$
+        (xy)^n = x^n\cdot y^n
+        $$
+        $$
+        x^{n + m} = x^n\cdot x^m
+        $$
+        $$
+        (x^n)^m = x^{nm}
+        $$
+        下面我们运用反函数的性质，对第一个性质在 $x^{\frac 1 n}$ 中加以推广，方便后续证明。第二、三个性质将与有理数整数幂一同推广。
+
+        \paragraph{证明：}
+        设 $f(x) = x^n\ (x \in \mathbb R^+, n \in \mathbb N^+)$。首先，有 $f(xy) = f(x)\cdot f(y)$，且 $f^{-1}(f(xy)) = xy$。\\
+        而 $xy = f^{-1}(f(x))\cdot f^{-1}(f(y))$。
+        且有 $$
+        f^{-1}(f(xy)) = f^{-1}(f(x)\cdot f(y))
+        $$
+        $$
+        \Rightarrow f^{-1}(f(x))\cdot f^{-1}(f(y)) = f^{-1}(f(x)\cdot f(y))
+        $$
+        由于 $f(x), f(y)$ 都是整数，且能取遍 $\mathbb R^+$，分别记它们为 $a, b$，则
+        $$
+        f^{-1}(ab) = f^{-1}(a) \cdot f^{-1}(b)
+        $$
+        即为 $(ab)^{\frac 1 n} = a^{\frac 1 n}\cdot b^{\frac 1 n}$。$\square$
+
+    \subsection{负整数指数幂}
+        对于负整数指数幂，我们定义：$x^{-n} = \dfrac 1 {x^{n}}\ (n \in \mathbb N^+)$。
+    
+    \subsection{有理数指数幂}
+        \subsubsection{定义与基本性质}
+            记有理数 $t = \dfrac p q, p \in \mathbb Z, q \in \mathbb N^+$，则我们定义：$x^t = (x^p)^{\frac 1 q}$。\\
+            由定义，很容易验证 $(xy)^t = x^t\cdot y^t$：
+            $$
+            x^t\cdot y^t = (x^p)^{\frac 1 q}\cdot (y^p)^{\frac 1 q} = (x^p y^p)^{\frac 1 q} = ((xy)^p)^{\frac 1 q} = (xy)^{\frac p q} = (xy)^t\ \ \ \square
+            $$
+
+            现在，我们需要验证：
+            \begin{itemize}
+            \item 有理数指数幂的定义具有唯一性，也就是说，将同一个有理数用两种不同的分数形式表示，所得的幂相等；
+            \item $x^{n + m} = x^n\cdot x^m, (x^n)^m = x^{nm}$ 在有理数指数幂中都成立。
+            \end{itemize}
+
+            我们可以运用的工具有：整数指数幂的上述三个性质、$(x^q)^{\frac 1 q} = (x^{\frac 1 q})^q = 1\ (q \in \mathbb N^+)$
+            和上面写到的 $(xy)^t = x^t\cdot y^t$。
+
+            \paragraph{证明 (1)：} 设 $\dfrac p q = \dfrac r s,\ (p, r\in \mathbb Z,\ q, s\in \mathbb N^+)$，有 $ps = qr$，则：
+            $$
+            (x^{\frac p q})^q = ((x^p)^{\frac 1 q})^{q} = x^p\ \cdots (*)
+            $$
+            则
+            $$
+            (x^{\frac p q})^{qs} = x^{ps} = x^{qr} = (x^{\frac r s})^{sq}
+            $$
+            则 $$
+            x^{\frac p q} = x^{\frac r s}
+            $$
+            （两边同时对 $\dfrac 1 {qs}$ 乘方）$\square$\\
+
+            \paragraph{证明 (2.1)：}
+            $$
+            (x^{\frac p q  + \frac r s})^{qs} = (x^{\frac{ps + qr}{qs}})^{qs} = x^{ps + qr} = x^{ps}\cdot x^{qr} = (x^{\frac p q})^{qs} \cdot (x^{\frac r s})^{qs} = (x^{\frac p q}\cdot x^{\frac r s})^{qs}
+            $$
+            两边同时对 $\dfrac 1 {qs}$ 乘方得 $x^{\frac p q  + \frac r s} = x^{\frac p q}\cdot x^{\frac r s}$。$\square$\\
+            
+            \paragraph{证明 (2.2)：}
+            $$
+            ((x^{\frac p q})^{\frac r s})^{sq} = (x^{\frac p q})^{qr} = x^{pr}
+            $$
+            （不断运用 $(*)$ 式）\\
+            而由 $(*)$， $$
+            (x^{\frac{pr}{qs}})^{qs} = x^{pr}
+            $$
+            则对 $$
+            ((x^{\frac p q})^{\frac r s})^{sq} = (x^{\frac{pr}{qs}})^{qs}
+            $$
+            两边开 $qs$ 次方即得 $(x^{\frac p q})^{\frac r s} = x^{\frac{pr}{qs}}$。$\square$
+        \subsubsection{为实数指数幂做准备}
+            为了给指数函数的定义做准备，我们还要验证一些结论。
+
+            \paragraph{Lemma 1} $u(x) = a^x\ (x \in \mathbb Q, a \in \mathbb R^+)$ 在 $a > 1$ 时是单调递增的。
+            \subparagraph{证明：} 由于 $a^x = a^{\frac p q} = (a^p)^{\frac 1 q}$，而 $(a^p)^{\frac 1 q}$ 是关于 $a$ 单调递增的（复合函数内外两层均递增，此时可以推广到 $a \geq 1$）\\
+            则 $x, y\in \mathbb Q, x > y$ 时，$a^x - a^y = a^y(a^{x - y} - 1^{x - y}) > 0$。$\square$
+
+            \paragraph{Lemma 2} $\{a^{\frac 1 n}\}$ 收敛于 $1$（$a > 1$）。
+
+            \subparagraph{证明：} 易得 $\{a^{\frac 1 n}\}$ 是单调递减且有下界 $1$ 的数列，则它必定收敛于其下确界 $A$。\\
+            下证：$A = 1$。\\
+            由于 $a^{\frac 1 n} > A$，有 $a > A^n$。
+            若 $A > 1$，由二项式定理得 $A^n = ((A - 1) + 1)^n \geq 1 + n(A - 1)$\\
+            则 $A^n$ 是发散的，但 $a$ 是有限数，矛盾。故 $A = 1$。$\square$
+        
+
+    
+\section{实数指数幂与指数函数}
+    \subsection{实数指数幂的定义}
+        现在，我们有了有理数指数幂的完整定义与常见性质，我们来定义实数指数幂：
+        $$
+        a^x = \begin{cases}
+            \sup_{r < x, r \in \mathbb Q}a^r, x \notin \mathbb Q\\
+            a^x, x \in \mathbb Q
+        \end{cases}
+        $$
+    \subsection{指数函数}
+        需要验证 $u(x) = a^x\ (a > 1)$ 是单调递增的连续函数。
+        \paragraph{单调递增的证明} 以下默认 $x_1 < x_2$。
+            \subparagraph{对有理数 $x_1$ 与无理数 $x_2$ 的函数值进行比较：}
+                由有理数的稠密性，必定有 $x_3 \in (x_1, x_2)$ 且 $x_e \in \mathbb Q$。\\
+                则 $a^{x_1} < a^{x_3} \leq a^{x_2}$。
+            \subparagraph{对无理数 $x_1$ 与有理数 $x_2$ 的函数值进行比较：}同理。
+            \subparagraph{对无理数 $x_1$ 与无理数 $x_2$ 的函数值进行比较：}
+                必定存在 $x_3 \in (x_1, x_2)$ 且 $x_3 \in \mathbb Q$，则 $a^{x_1} < a^{x_3} < a^{x_2}$。
+            
+            因此，$u(x)$ 单调递增。
+        \paragraph{连续性的证明}
+            我们转化为证明 $u(x)$ 在 $(-\infty, \beta]\ (\forall \beta \in \mathbb R)$ 上一致连续。
+
+            $\forall \beta \in \mathbb R, \forall \delta > 0$ 任取有理数 $r, s < \beta\ (r > s, r - s < \delta)$。
+            从而 $$
+            a^r - a^s = a^s(a^{r - s} - 1) < a^\beta (a^{r - s} - 1)
+            $$
+            由于 $a^\beta$ 为有界量，且 $\lim_{n \to +\infty} a^{\frac 1 n} = 1$\\
+            则 $\forall \epsilon > 0, $ 都有 $N \in \mathbb N,$ 使得 $n > N$ 时 $a^\beta (a^{\frac 1 n} - 1) < \epsilon$。\\
+            记 $\delta$ 其中一个满足条件的 $\dfrac 1 n$，则 $a^r - a^s < a^\beta (a^{r - s} - 1) < a^\beta (a^\delta - 1) < \epsilon$。\\
+            在 $(-\infty, \beta]$ 中任取两个实数 $x, y\ (x < y)$，使得 $|x - y| < \dfrac{\delta}{3}$，则必定存在实数 $s < x$ 使得 $|s - x| < \dfrac{\delta}{3}$ 和 $t > y$ 使得 $|t - y| < \dfrac{\delta}{3}$。
+            则 $|a^x - a^y| < |a^r - a^s| < \epsilon$。\\
+            则 $u(x)$ 在 $(-\infty, \beta]\ (\forall \beta \in \mathbb R)$ 上一致连续得证。那么，$u(x)$ 在任意的 $(-\infty, \beta]$ 上连续，则 $u(x)$ 在 $\mathbb R$ 上连续。$\square$
+
+        我们再定义 $1^x \equiv 1\ (\forall x \in \mathbb R), (\dfrac 1 a)^x = a^{-x}\ (a > 1)$。有了前面的证明，容易证明这两类函数都是连续的，且后者在 $\mathbb R$ 上严格单调递减。\\
+        当 $a > 0$ 且 $a \neq 1$ 时，我们定义 $u(x) = a^x$ 为指数函数。
+    \subsection{验证实数指数幂的性质}
+        我们验证了有理数指数幂符合整数指数幂的三条性质，下面我们一一验证实数指数幂也符合这样的三条性质。
+        \paragraph{验证 $(ab)^x = a^x\cdot b^x$}
+            设 $\{x_n\}$ 是收敛于 $x$ 的有理数列，由于 $u(x) = a^x$ 是连续函数，$$
+            \lim_{n \to +\infty}(ab)^{x_n} = (ab)^{\lim_{n \to +\infty} x_n} =(ab)^x
+            $$
+            $$
+            \lim_{n \to +\infty}a^{x_n}\cdot b^{x_n} = (\lim_{n \to +\infty}a^{x_n})\cdot (\lim_{n \to +\infty}b^{x_n}) = a^x\cdot b^x
+            $$
+            而 $\lim_{n \to +\infty}(ab)^{x_n} = \lim_{n \to +\infty}a^{x_n}\cdot b^{x_n}$ 成立，则原命题得证。$\square$
+        \paragraph{验证 $a^{x_1 + x_2} =a^{x_1}\cdot a^{x_2}$}
+            类似地，可以通过设 $x_n^{(1)}, x_n^{(2)}$ 分别为收敛于 $x_1, x_2$ 的两个有理数列，结合 $y = a^x$ 的连续性说明。详细证明略。
+        \paragraph{验证 $(a^{x_1})^{x_2} =a^{x_1 x_2}$}
+            设 $x_n^{(1)}, x_n^{(2)}$ 分别为收敛于 $x_1, x_2$ 的两个有理数列，
+            $$
+            (a^{x_1})^{x_n^{(2)}} = \lim_{m \to +\infty} (a^{x_m^{(1)}})^{x_n^{(2)}} = \lim_{m \to +\infty} a^{x_m^{(1)} x_n^{(2)}} = a^{x_1\cdot x_n^{(2)}}
+            $$
+            $$
+            (a^{x_1})^{x_2} = \lim_{n \to +\infty} (a^{x_1})^{x_n^{(2)}} = \lim_{n \to +\infty} a^{x_1\cdot x_n^{(2)}} = a^{x_1\cdot x_2}\space\space \square
+            $$
+\section{$e^x$ 与指数函数的级数表达式}
+    说到最重要的指数函数，那非自然指数 $f(x) = e^x$ 莫属了。我们在接受 $e$ 的定义的基础上，分析 $e^x$ 的表达形式与各种性质。
+    \subsection{$e^x$ 的表达式}
+        \subsubsection{$e^x = \lim_{n \to +\infty}(1 + \dfrac x n)^n$}
+            我们在 $e = \lim_{x \to \pm\infty} (1 + \dfrac 1 x)^x$ 的基础上加以证明。（这个定理位于陈纪修《数学分析》第三版例 3.1.13）\\
+            当 $x > 0$ 时，记 $x' = px$，则 $p \to +\infty$ 时 $$
+            e^x = \lim_{p\to +\infty}(1 + \dfrac 1 p)^{px} = \lim_{x' \to +\infty}(1 + \frac x {x'})^{x'} = \lim_{n \to +\infty}(1 + \frac x n)^n
+            $$
+            $x < 0$ 时，记 $x' = px$，则 $$
+            e^x = \lim_{p \to -\infty}(1 + \dfrac 1 p)^{px} = \lim_{x'\to +\infty}(1 + \dfrac{x}{x'})^{x'} = \lim_{n \to +\infty}(1 + \frac x n)^n
+            $$
+        \subsubsection{$e^x$ 的幂级数表达式}
+            我们接下来要说明 $e^x = \sum_{n = 0}^{\infty}\dfrac{x^n}{n!}$。\\
+            运用泰勒展开的知识，我们只需要证明 $(e^x)' = e^x$。
+            我们先证明：
+            \paragraph{Lemma} $e^{\Delta x} - 1\sim \Delta x\ (\Delta x \to 0)$。
+                \subparagraph{证明：}
+                    $$
+                    \begin{aligned}
+                    e^{\Delta x} - 1 &= \lim_{n \to +\infty} (1 + \dfrac{\Delta x}{n})^n - 1\\
+                    &= 1 + n\cdot \dfrac{\Delta x}{n} + o(\Delta x) - 1\\
+                    &= \Delta x + o(\Delta x)
+                    \end{aligned}
+                    $$
+                    $$
+                    \lim_{\Delta x \to 0}\dfrac{e^{\Delta x} - 1}{\Delta x} = \lim_{\Delta x \to 0} \dfrac{\Delta x + o(\Delta x)}{\Delta x} = 1
+                    $$
+            然后有 $$
+            \lim_{\Delta x \to 0}\dfrac{e^{x + \Delta x} - e^x}{\Delta x} = e^x \lim_{\Delta x \to 0} \dfrac{e^{\Delta x} - 1}{\Delta x} = e^x
+            $$
+            即 $(e^x)' = e^x$。那么 $$
+            e^x = \sum_{n = 0}^{\infty}\dfrac{x^n}{n!}
+            $$ 成立。
+
+            注：更加严谨的做法应当是，直接用级数形式定义 $\exp(x)$（即 $e^x$），然后用夹逼定理和二项式定理验证两个定义等价，也就是说，两个定义等价的证明有更加本质的版本。在级数定义下很容易验证 $exp(x)$ 的导数就是它本身。\\
+            陈纪修《数学分析》课本上采用的方法也是可行的，但是要先定义 $\ln x$ 并验证 $y = \ln x$ 的连续性。\\
+            $\ln x$ 常见的定义也有两种：第一种是 $e^x$ 的反函数，也就是 $\lim_{n \to \infty} n(x^{\frac 1 n} - 1)$；正式定义为积分 $\int_{1}^{x} \dfrac 1 t {\rm d}t$。\\
+            可以证明这两个定义等价。
+
+            利用级数的知识，我们可以证明 $e^x$ 的级数表达式是（绝对）收敛的，并在级数定义下证明 $e^{x_1 + x_2} = e^{x_1}\cdot e^{x_2}$。\\
+
+            由 d'Alembert 判别法，$$
+            \varlimsup_{n \to \infty} \left| \dfrac{\dfrac{x^{n + 1}}{(n + 1)!}}{\dfrac{x^n}{n!}}\right| = \varlimsup_{n \to \infty} \dfrac{|x|}{n + 1} = 0
+            $$
+            则 $e^x$ 是绝对收敛的，此时 Cauchy 乘积才有意义。\\
+            由 Cauchy 乘积的定义，
+            $$
+            \begin{aligned}
+            & (\sum_{i = 0}^{\infty}\dfrac{x^i}{i!})(\sum_{j = 0}^{\infty}\dfrac{y^j}{j!})\\
+            =& \sum_{n = 0}^{\infty}(\sum_{i + j = n}\dfrac{x^i y^j}{i! j!})\\
+            =& \sum_{i = 0}^{\infty}\dfrac{1}{n!}\sum_{i = 0}^{n}\binom{n}{i}x^i y^{n - i}\\
+            =& \sum_{i = 0}^{\infty}\dfrac 1 {n!}(x + y)^n
+            \end{aligned}
+            $$
+            （注：最后一步用到二项式定理）$\square$
+
+    \subsection{指数函数的级数表达式}
+        由 $a^x = e^{x\ln a} = (e^x)^{\ln a}$，我们还可以给出指数函数的级数表达形式。\\
+        这里的 $\ln$ 函数也需要定义，我们不妨把它定义为 $\exp(x)$ 的反函数。当然也有许多性质需要验证，这里不再陈述。
+    \subsection{将 $\exp(x)$ 扩展到复数域}
+        我们注意到，$\exp(x)$ 的定义并不只局限在 $\mathbb R$ 上，不论是数列极限的定义还是级数形式的定义。对于一个复数 $x$ 同样可以定义 $\exp(x)$。
+
+        下面，我们将会运用这一性质，定义 $\sin, \cos$ 这两个三角函数，揭示它们的几何含义。
+\section{三角函数的严格定义}
+    \subsection{$\sin, \cos$ 的两种定义方式}
+        我们规定
+        $$
+        \sin x = \Im(\exp(ix)), \cos x = \Re(\exp(ix))
+        $$
+        我们更熟悉的形式是它们的泰勒（麦克劳林）展开式：
+        $$
+        \sin x = \sum_{n = 0}^{\infty} \dfrac{(-1)^{n} x^{2n + 1}}{(2n + 1)!}
+        $$
+        $$
+        \cos x = \sum_{n = 0}^{\infty} \dfrac{(-1)^{n} x^{2n}}{(2n)!}
+        $$
+        那么，它们的定义过程究竟是什么？这样的定义与我们中学时接触的带有几何意义的三角函数是如何建立关联的？
+
+    \subsection{简述三角函数的严格定义过程}
+        这个问题其实比较复杂，我们首先应当定义“角”的概念。在此，我们将其定义为“平面上的旋转量”，但这依然不是一个分析学上的定义。\\
+        我们考察一个函数，它能表示从一个模长为 $1$ 的复数 $z$ 在复平面内逆时针旋转 $\theta$ 角到另一个模长为 $1$ 的复数 $z'$。形式化地说：
+        $$
+        z' = r(\theta)\cdot z
+        $$
+        那么，我们需要：$\theta$ 是一个实数；$r(\theta)$ 的模长为 $1$；$r$ 必须是连续函数。\\
+        我们再考察 $z'$ 旋转 $\varphi$ 角到 $z''$ 的过程，有
+        $$
+        z'' = r(\theta + \varphi)z = r(\varphi)(r(\theta)z)
+        $$
+        则函数 $r(\theta)$ 需要满足 $r(\theta + \varphi) = r(\varphi)r(\theta)$。\\
+        可以得到 $\forall \theta \in \mathbb R, r(\theta) = r(\theta)\cdot r(0)$，则 $r(0) = 1$。\\
+        同时，有 $r(-\theta) = \dfrac{1}{r(\theta)} = \dfrac{\left|r^2(\theta)\right|}{e(\theta)} = \overline{e(\theta)}$。\\
+        我们通过这些性质构造出函数 $r(\theta)$，发现它具有以下形式：
+        $$
+        r(\theta) = \lim_{n \to \infty}(1 + \dfrac{i\theta}{n})^n
+        $$
+        它就是 $e^{i\theta}$ 的一种定义式，只不过 $i\theta \in \mathbb C$。可以验证，复数域下它与级数定义式依然等价，那么也有
+        $$
+        r(\theta) = \sum_{i = 0}^{\infty}\dfrac{(i\theta)^n}{n!}
+        $$
+        接下来，我们揭示三角函数以上两个定义的联系。
+
+    \subsection{两种定义方式的联系}
+        由 $\exp(ix)$ 的级数表达式，$$
+        \begin{aligned}
+        \exp(ix) &= \sum_{n = 0}^{\infty}\dfrac{(ix)^n}{n!}\\
+        &= \sum_{n = 2m, m \in \mathbb N}^{\infty} \dfrac{(ix)^n}{n!} + \sum_{n = 2m + 1, m \in \mathbb N}^{\infty} \dfrac{(ix)^n}{n!}\\
+        &= \sum_{m = 0}^{\infty}\dfrac{(i^2)^m x^{2m}}{(2m)!} + \sum_{m = 0}^{\infty}\dfrac{i^{2m + 1} x^{2m + 1}}{(2m + 1)!}\\
+        &= \sum_{m = 0}^{\infty}\dfrac{(-1)^m x^{2m}}{(2m)!} + \sum_{m = 0}^{\infty}\dfrac{(-1)^m\cdot i\cdot x^{2m + 1}}{(2m + 1)!}\\
+        \end{aligned}
+        $$
+        则 $$
+        \Re(\exp(ix)) = \sum_{m = 0}^{\infty}\dfrac{(-1)^m x^{2m}}{(2m)!}
+        $$
+        $$
+        \Im(\exp(ix)) = \sum_{m = 0}^{\infty}\dfrac{(-1)^m x^{2m + 1}}{(2m + 1)!}
+        $$
+        分别对应 $\cos x$ 和 $\sin x$。
+    \subsection{验证 $\sin x, \cos x$ 的一些性质}
+        \subsubsection{三角恒等式}
+            由上面的定义方式，$\sin^2(x) + \cos^2(x)$ 就是 $e^{i\theta}$ 模长的平方，一定为 $1$。
+        \subsubsection{和角公式}
+            接着，我们验证和角公式：$\sin(x + y) = \sin x\cos y + \cos x\sin y, \cos(x + y) = \cos x\cos y - \sin x\sin y$。\\
+            $$
+            \begin{aligned}
+            e^{i(x + y)} &= e^{ix} \cdot e^{iy}\\
+            &= (\cos x + i\sin x)(\cos y + i\sin y)\\
+            &= \cos x\cos y - \sin x\sin y + i(\sin x\cos y + \sin y\cos x)\\
+            \cos(x + y) &= \Re(e^{i(x + y)}) = \cos x\cos y - \sin x\sin y\\
+            \sin(x + y) &= \Im(e^{i(x + y)}) = \sin x\cos y + \sin y\cos x
+            \end{aligned}
+            $$
+        
+        \subsubsection{$\pi$ 的定义，$\sin x, \cos x$ 的单调性与特殊值}
+        要描述三角函数的几何意义以及周期性等，我们首先要定义 $\pi$。$\pi$ 的定义方式可以是：最小的满足 $\sin \theta = \dfrac{1}{\sqrt 2}$ 的正数 $\theta$ 的四倍，或者是：使得 $\cos \theta$ 为 $0$ 的最小正数的两倍，等等。\\
+        
+        我们采用前者定义。\\
+        在证明 $\sin x, \cos x$ 在 $[0, 1]$ 上的单调性之后运用介值定理，可以证明这样的 $\dfrac{\pi}{4}$ 的唯一性：\\
+        在 $[0, 1]$ 上，$\cos x \ge 1 - \dfrac{x^2}{2} \ge \dfrac 1 2$，而 $\sin x \ge x - \dfrac 1 6 x^3 \ge \dfrac 5 6 x$。（由 Leibniz 级数余和的性质 $|r_n \le u_{n + 1}|$，$u$ 为单调趋于 $0$ 的数列，参考陈纪修《数学分析》定理 9.4.2 注解）
+        则 $\sin x$ 在 $(0, 1]$ 上 $> 0$。\\
+        且 $\cos x = \sqrt{1 - \sin^2 x} \le 1$。\\
+        当 $0 < \theta_1 < \theta_2 \le 1$ 时，$\cos \theta_2 - \cos \theta_1 = \cos(\theta_1 + \Delta \theta) - \cos\theta_1 = \cos \theta_1(\cos(\Delta \theta) - 1) - \sin \theta_1 \sin(\Delta \theta) < 0$\\
+        则 $\cos x$ 在 $(0, 1]$ 上单调递减，由 $\sin^2 x = 1 - \cos^2 x$ 且 $\sin x > 0$，$\sin x$ 递增。而 $\sin 1 > \dfrac 5 6$，则由介值定理，这样的 $\dfrac{\pi}{4}$ 唯一。
+        
+        又由 $\sin^2 x + \cos^2 x = 1$，$\cos \dfrac{\pi}{4} = \dfrac{1}{\sqrt 2}$
+        然后令 $x = \theta + \dfrac{\pi}{4}\ (x \in [\dfrac{\pi}{4}, \dfrac{\pi}{2}])$。\\
+        由和角公式，$\sin x = \dfrac{1}{\sqrt 2}(\sin (\theta) + \cos (\theta)), \cos x = \dfrac{1}{\sqrt 2}(\cos \theta - \sin \theta)$
+        注意到 $\cos x$ 为单调递减函数减去单调递增函数，必为单调递减函数，同样推得 $\sin x$ 在 $[\dfrac{\pi}{4}, \dfrac{\pi}{2}]$ 仍递增。将 $x = \dfrac{\pi}{2}$ 代入上述两式得 $\sin \dfrac{\pi}{2} = 1, \cos \dfrac{\pi}{2} = 0$。\\
+        当 $x \in [\dfrac{\pi}{2}, \pi]$ 时，我们可以采用和角公式推得诱导公式来探究 $\sin x, \cos x$ 的性质，结果都与我们在中学时接触到的相符合。当 $x \in [\pi, 2\pi]$ 时，同样可以由诱导公式推出相应的性质。
+        
+        \subsubsection{三角函数的周期性}
+        下面我们简要讨论 $\sin x, \cos x$ 的周期性。\\
+        由上述讨论，我们可以得到 $\sin \pi = 0, \cos \pi = -1$，即 $e^{i\pi} = -1$。\\
+        那么，$r(\pi + x) = r(\pi)\cdot r(x) = -r(x)\ (x \in [0, \pi])$。则 $r(x + 2\pi) = r(x)$。使得 $\cos x = 1, \sin x = 0$ 的最小正实数为 $2\pi$，且由 $r(x + 2k\pi) = r(x) \cdot r^k(2\pi) = r(x)$，得到 $2\pi$ 是 $r(x)$ 的最小正周期。容易验证 $\sin x, \cos x$ 的最小正周期就是 $2\pi$。
+        
+        \subsubsection{简要说明三角函数的几何意义}
+            可以证明，半径为 $1$ 的半圆弧长为 $\pi$，但在此之前我们还要定义弧长的概念。\\
+            在微积分中，曲线长度的定义可以不依赖于几何图形，而是运用勾股定理与黎曼和求出弧长微分 ${\rm d}l = \sqrt{{x'}^2 (t) + {y'}^2 (t)}{\rm d}t$。我们接受这一概念，在推导出 $\sin x, \cos x$ 导数（可以用级数定义形式导出）的基础上验证此定义下弧长与角度的关系。\\
+            由于 ${\rm d}l = \sqrt{[(\sin t)']^2 + ([\cos t)']^2}{\rm d} t = {\rm d}t$，在此定义（弧度制）下弧长微分与角度微分相等，两边积分得弧长与角度的对应关系。
+            设点 $Z$ 为复平面上对应实数 $1$ 的点沿单位圆逆时针旋转 $\theta$ 角得到的点，我们有：$\cos x$ 是线段 $OZ$ 在实轴上的投影长（有向），$\sin x$ 是它在虚轴上的投影长（有向）。
+
+\section{总结}
+    在本论文中，我们从自然数指数幂经过整数指数幂、有理数指数幂、实数指数幂一步步探索到复数指数幂，再运用它定义了指数函数与三角函数，简要回顾了运用分析观点严格定义三角函数的过程，尝试从基础开始一步步打造起三角学的大厦。
+    
+    通过写作本文，我加深了对于指数运算、指数函数和三角函数的理解，深刻体会到运用分析学观点定义一个很直观却并不特别初等的概念的不易。
+    
+    但是本文涉及的内容尚且有限，并且其中部分定理并没有完整的证明过程，实属本人能力有限且受篇幅限制。望斧正，谢谢！
+\section{参考资料}
+\setlength{\parindent}{0pt}
+    《数学分析》第三版，陈纪修，高等教育出版社\\
+    《微积分入门》Ⅰ，小平邦彦著，裴东河译，人民邮电出版社\\
+    维基百科中有关自然对数定义的内容：\url{https://zh.m.wikipedia.org/zh-tw/%E8%87%AA%E7%84%B6%E5%B0%8D%E6%95%B8}\\
+    维基百科中有关指数函数的内容：\url{https://zh.wikipedia.org/wiki/%E6%8C%87%E6%95%B0%E5%87%BD%E6%95%B0}
+
+\end{document}
